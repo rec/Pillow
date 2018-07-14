@@ -535,8 +535,8 @@ def _write_local_header(fp, im, offset, flags):
                  o8(len(im.encoderinfo["comment"])) +
                  im.encoderinfo["comment"] +
                  o8(0))
-    if "loop" in im.encoderinfo:
-        number_of_loops = im.encoderinfo["loop"]
+    number_of_loops = im.encoderinfo.get("loop", 0)
+    if number_of_loops != 1:
         fp.write(b"!" +
                  o8(255) +                # extension intro
                  o8(11) +
